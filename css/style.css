@@ -1,0 +1,639 @@
+/* ========== 公益助学 - 全局样式 ========== */
+
+:root {
+  --primary: #e87461;
+  --primary-dark: #d45b48;
+  --primary-light: #fde8e4;
+  --success: #52c41a;
+  --warning: #faad14;
+  --text: #333;
+  --text-secondary: #666;
+  --text-light: #999;
+  --bg: #f8f8f8;
+  --white: #fff;
+  --border: #eee;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --radius: 12px;
+  --max-width: 480px;
+  --nav-height: 50px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* ========== 导航栏 ========== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: var(--white);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(232, 116, 97, 0.3);
+}
+
+.navbar .logo {
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar .logo .icon {
+  font-size: 24px;
+}
+
+.navbar .nav-links {
+  display: flex;
+  gap: 16px;
+}
+
+.navbar .nav-links a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.navbar .nav-links a.active,
+.navbar .nav-links a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ========== 顶部横幅 ========== */
+.banner {
+  background: linear-gradient(135deg, var(--primary-light), #fff5f3);
+  padding: 24px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.banner h1 {
+  font-size: 22px;
+  color: var(--primary-dark);
+  margin-bottom: 6px;
+}
+
+.banner p {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.banner .stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.banner .stat-item {
+  text-align: center;
+}
+
+.banner .stat-item .num {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.banner .stat-item .label {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* ========== 孩子卡片列表 ========== */
+.child-list {
+  padding: 12px 16px;
+}
+
+.child-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  display: flex;
+  gap: 14px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.child-card:active {
+  transform: scale(0.98);
+}
+
+.child-card .card-photo {
+  width: 80px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f0f0f0;
+}
+
+.child-card .card-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.child-card .card-name {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.child-card .card-meta {
+  font-size: 12px;
+  color: var(--text-light);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.child-card .card-meta span {
+  background: #f5f5f5;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.child-card .card-wish {
+  font-size: 13px;
+  color: var(--primary);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.child-card .card-wish::before {
+  content: "🎁";
+  font-size: 14px;
+}
+
+.child-card .status-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.status-badge.available {
+  background: #e6f7e6;
+  color: var(--success);
+}
+
+.status-badge.adopted {
+  background: #f5f5f5;
+  color: var(--text-light);
+}
+
+/* ========== 详情页 ========== */
+.detail-container {
+  padding: 0 0 20px;
+}
+
+.detail-photo {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.detail-body {
+  padding: 16px;
+}
+
+.detail-name {
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.detail-meta-item {
+  background: #fafafa;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.detail-meta-item .label {
+  color: var(--text-light);
+  font-size: 11px;
+}
+
+.detail-meta-item .value {
+  color: var(--text);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.detail-section {
+  margin-top: 16px;
+}
+
+.detail-section h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detail-section .content {
+  font-size: 14px;
+  color: var(--text-secondary);
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 8px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+/* ========== 认领按钮 ========== */
+.adopt-section {
+  position: sticky;
+  bottom: 0;
+  background: var(--white);
+  padding: 14px 16px;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.adopt-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.adopt-btn:active {
+  opacity: 0.8;
+}
+
+.adopt-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.adopted-info {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.adopted-info .adopter-name {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ========== 弹窗 / Modal ========== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  width: calc(100% - 48px);
+  max-width: 360px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.modal h3 {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.modal .form-group {
+  margin-bottom: 14px;
+}
+
+.modal .form-group label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.modal .form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.modal .form-group input:focus {
+  border-color: var(--primary);
+}
+
+.modal .btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal .btn {
+  flex: 1;
+  padding: 11px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.modal .btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.modal .btn-cancel {
+  background: #f5f5f5;
+  color: var(--text-secondary);
+}
+
+/* ========== 我的认领页 ========== */
+.my-page {
+  padding: 12px 16px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-light);
+}
+
+.empty-state .icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 14px;
+}
+
+.adoption-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+
+.adoption-card .child-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.adoption-card .child-header img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.adoption-card .child-header .info {
+  flex: 1;
+}
+
+.adoption-card .child-header .name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.adoption-card .child-header .time {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.adoption-card .updates {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.adoption-card .update-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.adoption-card .thanks-block {
+  background: #fffaf7;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.adoption-card .section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 12px 0 6px;
+}
+
+/* ========== Toast 提示 ========== */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  z-index: 300;
+  animation: toastIn 0.3s ease;
+  pointer-events: none;
+}
+
+.toast.success {
+  background: rgba(82, 196, 26, 0.85);
+}
+
+.toast.error {
+  background: rgba(255, 77, 79, 0.85);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ========== 响应式 ========== */
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 100px;
+  }
+
+  .child-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .child-card {
+    margin-bottom: 0;
+  }
+}
+
+/* ========== 加载动画 ========== */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.loading::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========== 详情页补充 ========== */
+.photo-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.photo-item {
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.photo-item img {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.photo-desc {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.thanks-card {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.time-tag {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* ========== 筛选标签 ========== */
+.filter-tag {
+  padding: 6px 14px;
+  border-radius: 14px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-tag.active {
+  background: #fde8e4;
+  border-color: #e87461;
+  color: #e87461;
+}

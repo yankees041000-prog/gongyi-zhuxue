@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>孩子详情 - 公益助学</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo" style="cursor:pointer" onclick="history.back()">
+      <span style="font-size:20px">←</span> <span>孩子详情</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="my.html">我的认领</a>
+    </div>
+  </nav>
+
+  <div class="detail-container" id="detailContainer">
+    <div class="loading">正在加载...</div>
+  </div>
+
+  <div class="adopt-section" id="adoptSection" style="display:none">
+    <button class="adopt-btn" id="adoptBtn" onclick="openAdoptModal()">💝 认领这个孩子</button>
+    <div class="adopted-info" id="adoptedInfo" style="display:none">
+      已被 <span class="adopter-name" id="adopterNameDisplay"></span> 认领
+    </div>
+  </div>
+
+  <!-- 认领弹窗 -->
+  <div class="modal-overlay" id="adoptModal">
+    <div class="modal">
+      <h3>💝 确认认领</h3>
+      <div class="form-group">
+        <label>您的姓名 *</label>
+        <input type="text" id="inputName" placeholder="请输入您的姓名" maxlength="20">
+      </div>
+      <div class="form-group">
+        <label>手机号码 *</label>
+        <input type="tel" id="inputPhone" placeholder="请输入手机号" maxlength="11">
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-cancel" onclick="closeAdoptModal()">取消</button>
+        <button class="btn btn-primary" id="confirmAdoptBtn" onclick="confirmAdopt()">确认认领</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/feishu.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/child.js"></script>
+</body>
+</html>

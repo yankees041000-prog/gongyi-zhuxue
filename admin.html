@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>管理后台 - 公益助学</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .admin-container { padding: 12px 16px; }
+    .admin-tabs { display: flex; gap: 4px; margin-bottom: 14px; background: #fff; border-radius: 10px; padding: 4px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .admin-tab { flex:1; padding: 10px 0; text-align: center; font-size: 13px; border: none; background: none; border-radius: 8px; cursor: pointer; color: #666; transition: all .2s; }
+    .admin-tab.active { background: #e87461; color: #fff; font-weight: 600; }
+    .admin-panel { display: none; }
+    .admin-panel.active { display: block; }
+
+    .form-card { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .form-card h3 { font-size: 15px; margin-bottom: 10px; }
+    .form-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+    .form-row input, .form-row textarea, .form-row select { flex:1; min-width: 120px; padding: 10px 12px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; }
+    .form-row input:focus, .form-row textarea:focus { border-color: #e87461; }
+    .form-row textarea { min-height: 70px; resize: vertical; }
+    .btn-sm { padding: 8px 16px; font-size: 13px; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; }
+    .btn-primary { background: #e87461; color: #fff; }
+    .btn-danger { background: #ff4d4f; color: #fff; }
+    .btn-outline { background: #fff; color: #e87461; border: 1px solid #e87461; }
+    .btn-sm:disabled { opacity: .5; cursor: not-allowed; }
+
+    .child-admin-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-bottom: 1px solid #f0f0f0; }
+    .child-admin-item img { width: 40px; height: 50px; border-radius: 6px; object-fit: cover; }
+    .child-admin-item .info { flex:1; min-width:0; }
+    .child-admin-item .name { font-weight:600; font-size:14px; }
+    .child-admin-item .meta { font-size:12px; color:#999; }
+    .child-admin-item .actions { display: flex; gap: 4px; }
+
+    .adopt-table { width:100%; border-collapse:collapse; font-size:13px; }
+    .adopt-table th, .adopt-table td { padding: 8px 6px; border-bottom:1px solid #f0f0f0; text-align:left; }
+    .adopt-table th { color:#999; font-weight:500; font-size:12px; }
+
+    .preview-img { width: 60px; height: 60px; border-radius: 6px; object-fit: cover; border: 1px solid #eee; }
+
+    .login-box { max-width: 320px; margin: 80px auto; text-align: center; }
+    .login-box input { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 16px; text-align: center; margin-bottom: 12px; outline: none; }
+    .login-box input:focus { border-color: #e87461; }
+    .login-box button { width: 100%; padding: 12px; background: #e87461; color:#fff; border:none; border-radius: 10px; font-size: 16px; font-weight:600; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo"><span class="icon">🔧</span><span>管理后台</span></div>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="my.html">我的认领</a>
+      <a href="admin.html" data-page="admin" class="active">管理</a>
+    </div>
+  </nav>
+
+  <!-- 登录 -->
+  <div id="loginBox" class="login-box">
+    <h3 style="margin-bottom:16px">🔐 请输入管理密码</h3>
+    <input type="password" id="pwdInput" placeholder="管理密码" onkeydown="if(event.key==='Enter')login()">
+    <button onclick="login()">进入后台</button>
+  </div>
+
+  <!-- 管理面板（登录后可见） -->
+  <div id="adminMain" style="display:none">
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="children">孩子管理</button>
+      <button class="admin-tab" data-tab="adoptions">认领记录</button>
+      <button class="admin-tab" data-tab="add">添加孩子</button>
+    </div>
+
+    <!-- 孩子列表 -->
+    <div class="admin-panel active" id="panel-children">
+      <div class="admin-container" id="adminChildList"><div class="loading">加载中...</div></div>
+    </div>
+
+    <!-- 认领记录 -->
+    <div class="admin-panel" id="panel-adoptions">
+      <div class="admin-container" id="adminAdoptions"><div class="loading">加载中...</div></div>
+    </div>
+
+    <!-- 添加/编辑孩子 -->
+    <div class="admin-panel" id="panel-add">
+      <div class="admin-container">
+        <div class="form-card">
+          <h3 id="formTitle">➕ 添加孩子</h3>
+          <input type="hidden" id="editChildId">
+          <div class="form-row"><input type="text" id="fName" placeholder="姓名 *"></div>
+          <div class="form-row">
+            <input type="number" id="fAge" placeholder="年龄" style="flex:0.5">
+            <input type="text" id="fGrade" placeholder="年级" style="flex:1">
+          </div>
+          <div class="form-row"><input type="text" id="fSchool" placeholder="学校"></div>
+          <div class="form-row"><input type="text" id="fRegion" placeholder="地区"></div>
+          <div class="form-row"><textarea id="fDesc" placeholder="个人情况描述"></textarea></div>
+          <div class="form-row"><input type="text" id="fWish" placeholder="小心愿"></div>
+          <div class="form-row"><textarea id="fScores" placeholder="学习成绩"></textarea></div>
+          <div class="form-row">
+            <label style="font-size:13px;color:#666;padding:10px 0">照片：</label>
+            <input type="file" id="fPhoto" accept="image/*" style="border:none;padding:0;font-size:13px">
+            <img id="fPhotoPreview" class="preview-img" style="display:none">
+          </div>
+          <div class="form-row">
+            <select id="fStatus">
+              <option value="待认领">待认领</option>
+              <option value="已认领">已认领</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <button class="btn-sm btn-primary" id="submitChildBtn" onclick="submitChild()">保 存</button>
+            <button class="btn-sm btn-outline" id="cancelEditBtn" style="display:none" onclick="cancelEdit()">取消编辑</button>
+          </div>
+        </div>
+
+        <!-- 某孩子的近况/感谢信管理（编辑时显示） -->
+        <div class="form-card" id="childExtraPanel" style="display:none">
+          <h3>📷 上传近况照片</h3>
+          <div class="form-row">
+            <input type="text" id="updateDesc" placeholder="照片描述（如：2024年春节合影）">
+          </div>
+          <div class="form-row">
+            <input type="file" id="updatePhoto" accept="image/*">
+            <button class="btn-sm btn-primary" onclick="uploadUpdate()">上传</button>
+          </div>
+          <div id="updateList" style="margin-top:8px"></div>
+
+          <h3 style="margin-top:16px">💌 添加感谢信</h3>
+          <div class="form-row">
+            <select id="thanksType">
+              <option value="文字">文字</option>
+              <option value="图片">图片</option>
+            </select>
+          </div>
+          <div class="form-row"><textarea id="thanksContent" placeholder="感谢信内容"></textarea></div>
+          <div class="form-row">
+            <input type="file" id="thanksPhoto" accept="image/*">
+            <button class="btn-sm btn-primary" onclick="addThanks()">添加感谢信</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/feishu.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

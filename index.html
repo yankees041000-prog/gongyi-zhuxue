@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>公益助学</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo"><span class="icon">🎓</span><span>公益助学</span></div>
+    <div class="nav-links">
+      <a href="index.html" data-page="home" class="active">首页</a>
+      <a href="my.html" data-page="my">我的认领</a>
+      <a href="admin.html" data-page="admin">管理</a>
+    </div>
+  </nav>
+
+  <div class="banner">
+    <h1>每一份爱心，都是一束光</h1>
+    <p>扫码了解孩子们的故事，认领一份心愿</p>
+    <div class="stats">
+      <div class="stat-item"><div class="num" id="totalCount">-</div><div class="label">在册孩子</div></div>
+      <div class="stat-item"><div class="num" id="adoptedCount">-</div><div class="label">已认领</div></div>
+      <div class="stat-item"><div class="num" id="availableCount">-</div><div class="label">待认领</div></div>
+    </div>
+  </div>
+
+  <div style="padding:10px 16px;display:flex;gap:8px" id="filterBar">
+    <button class="filter-tag active" data-filter="all">全部</button>
+    <button class="filter-tag" data-filter="available">待认领</button>
+    <button class="filter-tag" data-filter="adopted">已认领</button>
+  </div>
+
+  <div class="child-list" id="childList">
+    <div class="loading">正在加载...</div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/feishu.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

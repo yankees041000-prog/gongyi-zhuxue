@@ -1,0 +1,8 @@
+{
+  "name": "gongyi-zhuxue",
+  "version": "1.0.0",
+  "description": "公益助学",
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}

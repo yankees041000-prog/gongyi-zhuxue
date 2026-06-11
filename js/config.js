@@ -12,13 +12,13 @@
 const FEISHU_CONFIG = {
   APP_ID: 'cli_aaa03b6bba79dccc',
   APP_SECRET: 'C4HorDx6nRUFxk7ffjmDagZL4PWBwrDr',
-  BITABLE_APP_TOKEN: 'YjHxwxUCniNK6sk6IW8cgX5snQh',
+  BITABLE_APP_TOKEN: 'SHE2bMWaOaK3jRsVy26c9yDPnif',
 
-  // 四个子表 ID（你手动创建）
-  TABLE_CHILDREN: 'tblnIrjrv42o38xs',   // 孩子信息表
-  TABLE_ADOPTIONS: 'tbl51JuspZb2bY0i',   // 认领记录表
-  TABLE_UPDATES: 'tblKpgrsheuBHYg7',     // 近况照片表
-  TABLE_THANKS: 'tblnbDW8gYGB6cgd',      // 感谢信表
+  // 四个子表 ID（API 自动创建，权限已通）
+  TABLE_CHILDREN: 'tblkhcsvKbktbuDr',   // 孩子信息表
+  TABLE_ADOPTIONS: 'tblADVZlF8EJ0Lo2',   // 认领记录表
+  TABLE_UPDATES: 'tbl3bPyHm2RQeZFA',     // 近况照片表
+  TABLE_THANKS: 'tblCYDSRhVpaNhTZ',      // 感谢信表
 };
 
 // 管理后台密码（进入 admin.html 时需要输入）
